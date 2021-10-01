@@ -21,8 +21,10 @@ import me.c1tad31.chb.commands.SayCommand;
 import me.c1tad31.chb.commands.SupportCommand;
 import me.c1tad31.chb.events.BotReadyEvent;
 import me.c1tad31.chb.modcommands.BanCommand;
+import me.c1tad31.chb.modcommands.ClearCommand;
 import me.c1tad31.chb.modcommands.KickCommand;
 import me.c1tad31.chb.modcommands.MuteCommand;
+import me.c1tad31.chb.modcommands.NukeCommand;
 import me.c1tad31.chb.modcommands.UnmuteCommand;
 import me.c1tad31.chb.modcommands.WarnCommand;
 import net.dv8tion.jda.api.JDA;
@@ -66,6 +68,8 @@ public class Bot {
                 commandClientBuilder.addCommand(new WarnCommand());
                 commandClientBuilder.addCommand(new SayCommand());
                 commandClientBuilder.addCommand(new SupportCommand());
+                commandClientBuilder.addCommand(new ClearCommand());
+                commandClientBuilder.addCommand(new NukeCommand());
     
     
                 CommandClient client = commandClientBuilder.build();
