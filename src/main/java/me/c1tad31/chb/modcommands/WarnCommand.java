@@ -14,6 +14,7 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.exceptions.PermissionException;
 
 public class WarnCommand extends Command{
 
@@ -48,9 +49,9 @@ public class WarnCommand extends Command{
                     sb.append(s + " ");
                 }
 
-                if(monkey.getNumberOfOffenses() >= 3) {
+                if(monkey.getNumberOfOffenses() + 1 > 3) {
                     try {
-                        warned.kick();
+                        warned.kick().queue();
                         event.getChannel().sendMessage(warned.getUser().getName() + " Was Kicked.").queue();
                     } catch(PermissionException e) {
                         event.getChannel().sendMessage("I dont have the Perms to kick!").queue();
@@ -63,6 +64,8 @@ public class WarnCommand extends Command{
                     warned.getUser().openPrivateChannel().queue((channel ->
                         MessageEmbed.createDMEmbed(event, channel, event.getMember(), "WARNING!", String.format("```%s```", warn), "Warning Count: " + monkey.getNumberOfOffenses(), Color.decode("#FFFFFF"))
                     ));
+
+                    monkey.setNumberOfOffenses(monkey.getNumberOfOffenses() + 1);
     
                 }
              
