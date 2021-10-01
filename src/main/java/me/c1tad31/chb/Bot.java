@@ -4,28 +4,34 @@ import com.jagrosh.jdautilities.command.CommandClient;
 import com.jagrosh.jdautilities.command.CommandClientBuilder;
 import me.c1tad31.chb.commands.HelpCommand;
 import me.c1tad31.chb.commands.MoveVCCommand;
+import me.c1tad31.chb.commands.SayCommand;
 import me.c1tad31.chb.events.BotReadyEvent;
 import me.c1tad31.chb.events.MessageEvent;
 import me.c1tad31.chb.modcommands.BanCommand;
 import me.c1tad31.chb.modcommands.KickCommand;
 import me.c1tad31.chb.modcommands.MuteCommand;
 import me.c1tad31.chb.modcommands.UnmuteCommand;
+import me.c1tad31.chb.modcommands.WarnCommand;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import javax.security.auth.login.LoginException;
 import java.io.*;
 import java.security.InvalidKeyException;
 import java.security.Key;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
 
 public class Bot {
+
+    public static List<CodeMonkey> code_monkeys = new ArrayList<>();
+
     public static void main(String[] args) throws IOException, LoginException {
-        //File file = new File("C:/Users/Carter/Desktop/ticket.txt");
-        
+
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Bot.class.getResourceAsStream("config/token.txt")));
         String token;
 
@@ -54,6 +60,8 @@ public class Bot {
                 commandClientBuilder.addCommand(new MuteCommand());
                 commandClientBuilder.addCommand(new UnmuteCommand());
                 commandClientBuilder.addCommand(new MoveVCCommand());
+                commandClientBuilder.addCommand(new WarnCommand());
+                commandClientBuilder.addCommand(new SayCommand());
     
     
                 CommandClient client = commandClientBuilder.build();

@@ -17,6 +17,8 @@ public class KickCommand extends Command {
         this.aliases = new String[]{"k", "remove"};
         this.userPermissions = new Permission[]{Permission.KICK_MEMBERS};
         this.botPermissions = new Permission[]{Permission.KICK_MEMBERS};
+        this.guildOnly = true;
+        this.cooldown = 10;
     }
 
     @Override
