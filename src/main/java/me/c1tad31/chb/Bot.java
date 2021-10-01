@@ -16,6 +16,8 @@ import javax.security.auth.login.LoginException;
 import java.io.*;
 import java.security.InvalidKeyException;
 import java.security.Key;
+import java.util.Base64;
+
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
@@ -36,25 +38,11 @@ public class Bot {
                 Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
 
                 cipher = Cipher.getInstance("AES");
-                cipher.init(Cipher.ENCRYPT_MODE, aesKey);
-                byte[] encrypted = cipher.doFinal(token.getBytes());
-                
-                StringBuilder sb = new StringBuilder();
-                for(byte b : encrypted) {
-                    sb.append((char)b);
-                }
-                String enc = sb.toString();
-                
-                byte[] bb = new byte[enc.length()];
-                for(int i = 0; i < enc.length(); i++) {
-                    bb[i] = (byte) enc.charAt(i);
-                }
-
                 cipher.init(Cipher.DECRYPT_MODE, aesKey);
 
-                System.out.println();
+                byte[] decodeKey = Base64.getDecoder().decode(token);
 
-                JDA jda = JDABuilder.createDefault(new String(cipher.doFinal(bb))).build();
+                JDA jda = JDABuilder.createDefault(new String(cipher.doFinal(decodeKey))).build();
                 CommandClientBuilder commandClientBuilder = new CommandClientBuilder();
                 commandClientBuilder.setPrefix("-");
                 commandClientBuilder.setHelpWord("helpme");
