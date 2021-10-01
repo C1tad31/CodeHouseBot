@@ -22,7 +22,8 @@ public class WarnCommand extends Command{
         this.name = "warn";
         this.help = "Warns a specified user in the server";
         this.aliases = new String[]{"w", "warn-user"};
-        // this.userPermissions = new Permission[]{Permission.ADMINISTRATOR};
+        this.userPermissions = new Permission[]{Permission.ADMINISTRATOR};
+        this.botPermissions = new Permission[]{Permission.ADMINISTRATOR};
     }
 
     
@@ -31,7 +32,7 @@ public class WarnCommand extends Command{
     @Override
     protected void execute(CommandEvent event) {
         String[] args = event.getArgs().split("\\s");
-        args[0] = "";
+        args[0] = "";     
 
         Member warned = event.getMessage().getMentionedMembers().get(0);
         
@@ -60,6 +61,7 @@ public class WarnCommand extends Command{
                 }else {
                           
                     String warn = sb.toString();
+
 
                     warned.getUser().openPrivateChannel().queue((channel ->
                         MessageEmbed.createDMEmbed(event, channel, event.getMember(), "WARNING!", String.format("```%s```", warn), "Warning Count: " + monkey.getNumberOfOffenses(), Color.decode("#FFFFFF"))
