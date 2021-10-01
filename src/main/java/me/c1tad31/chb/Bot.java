@@ -1,22 +1,8 @@
 package me.c1tad31.chb;
 
-import com.jagrosh.jdautilities.command.CommandClient;
-import com.jagrosh.jdautilities.command.CommandClientBuilder;
-import me.c1tad31.chb.commands.HelpCommand;
-import me.c1tad31.chb.commands.MoveVCCommand;
-import me.c1tad31.chb.commands.SayCommand;
-import me.c1tad31.chb.events.BotReadyEvent;
-import me.c1tad31.chb.events.MessageEvent;
-import me.c1tad31.chb.modcommands.BanCommand;
-import me.c1tad31.chb.modcommands.KickCommand;
-import me.c1tad31.chb.modcommands.MuteCommand;
-import me.c1tad31.chb.modcommands.UnmuteCommand;
-import me.c1tad31.chb.modcommands.WarnCommand;
-import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.JDABuilder;
-import javax.security.auth.login.LoginException;
-import java.io.*;
-import java.security.InvalidKeyException;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.security.Key;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -24,6 +10,23 @@ import java.util.List;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
+import javax.security.auth.login.LoginException;
+
+import com.jagrosh.jdautilities.command.CommandClient;
+import com.jagrosh.jdautilities.command.CommandClientBuilder;
+
+import me.c1tad31.chb.commands.HelpCommand;
+import me.c1tad31.chb.commands.MoveVCCommand;
+import me.c1tad31.chb.commands.SayCommand;
+import me.c1tad31.chb.commands.SupportCommand;
+import me.c1tad31.chb.events.BotReadyEvent;
+import me.c1tad31.chb.modcommands.BanCommand;
+import me.c1tad31.chb.modcommands.KickCommand;
+import me.c1tad31.chb.modcommands.MuteCommand;
+import me.c1tad31.chb.modcommands.UnmuteCommand;
+import me.c1tad31.chb.modcommands.WarnCommand;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.JDABuilder;
 
 
 public class Bot {
@@ -62,6 +65,7 @@ public class Bot {
                 commandClientBuilder.addCommand(new MoveVCCommand());
                 commandClientBuilder.addCommand(new WarnCommand());
                 commandClientBuilder.addCommand(new SayCommand());
+                commandClientBuilder.addCommand(new SupportCommand());
     
     
                 CommandClient client = commandClientBuilder.build();
