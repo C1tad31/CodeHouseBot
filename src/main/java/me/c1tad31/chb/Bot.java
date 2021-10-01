@@ -17,7 +17,7 @@ import java.io.*;
 
 public class Bot {
     public static void main(String[] args) throws IOException, LoginException {
-        File file = new File("/home/citadel/CodeHouseBot/src/main/java/me/c1tad31/chb/config/token.txt");
+        File file = new File("C:/Users/Carter/Desktop/ticket.txt");
         BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
         String token;
 
@@ -39,7 +39,7 @@ public class Bot {
 
             CommandClient client = commandClientBuilder.build();
             jda.addEventListener(client);
-            jda.addEventListener(new MessageEvent());
+           // jda.addEventListener(new MessageEvent());
             jda.addEventListener(new BotReadyEvent());
         }
         bufferedReader.close();
