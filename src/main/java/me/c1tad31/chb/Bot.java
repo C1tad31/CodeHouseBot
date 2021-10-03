@@ -37,6 +37,27 @@ public class Bot {
 
     public static List<CodeMonkey> code_monkeys = new ArrayList<>();
 
+    public static CodeMonkey getMonkey(String name) {
+        for(CodeMonkey monkey : code_monkeys) {
+            if(monkey.getUsername().equals(name)) {
+                return monkey;
+            }
+        }
+
+        return null;
+    }
+
+    public static int getMonkeyLocation(String name) {
+        for(CodeMonkey monkey : code_monkeys) {
+            if(monkey.getUsername().equals(name)) {
+                return code_monkeys.indexOf(monkey);
+            }
+        }
+
+        return -1;
+    }
+
+
     public static void main(String[] args) throws IOException, LoginException {
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Bot.class.getResourceAsStream("config/token.txt")));
@@ -73,6 +94,9 @@ public class Bot {
                 commandClientBuilder.addCommand(new ClearCommand());
                 commandClientBuilder.addCommand(new NukeCommand());
                 commandClientBuilder.addCommand(new XPSystem());
+                commandClientBuilder.addCommand(new CreateRole());
+                commandClientBuilder.addCommand(new AddRole());
+                commandClientBuilder.addCommand(new RemoveRole());
                     
     
                 CommandClient client = commandClientBuilder.build();
@@ -81,7 +105,6 @@ public class Bot {
                 jda.addEventListener(new MemberJoinEvent());
 
                 XPSystem system = new XPSystem();
-                system.startTimer();
 
             } catch (Exception e) {
              
@@ -90,5 +113,8 @@ public class Bot {
 
         }
         bufferedReader.close();
+
+        
+
     }
 }

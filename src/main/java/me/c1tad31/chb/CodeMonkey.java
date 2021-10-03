@@ -7,6 +7,13 @@ public class CodeMonkey {
     String warnReason;
     int numberOfOffenses;
 
+    public int xp = 0, messages = 0;
+
+    public CodeMonkey(String username, long id) {
+        this.username = username;
+        this.id = id;
+    }
+
     public CodeMonkey(String username, long id, String warnReason, int numberOfOffenses) {
         this.username = username;
         this.id = id;

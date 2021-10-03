@@ -31,14 +31,15 @@ public class MuteCommand extends Command {
         Message message = event.getMessage();
         Member target = event.getMessage().getMentionedMembers().get(0);
         StringBuilder reason = new StringBuilder();
-        Role role = (Role) event.getGuild().getRolesByName("Muted", true);
+        List<Role> role = event.getGuild().getRolesByName("Muted", true);
 
-        if (member == null) {
-            channel.sendMessage("Please Mention a member to mute!").complete().delete().queueAfter(10, TimeUnit.SECONDS);
+        for (Role r : role) {
+            if (!role) {
+                channel.sendMessage("Muted role not found... Creating one now!")
+                event.getGuild().createRole().setPermissions(Permission.EMPTY_PERMISSIONS).setColor(Color.GRAY).setName(args[1]).setHoisted(true).queue();
+            }
+        } else {
+            channel.sendMessage(" " + target.getUser().getAsMention() + " has been muted by: " + member.getUser().getAsMention() + "\nReason: " + reason).queue();
         }
-
-        // target.getGuild().addRoleToMember(target, role).append(reason).queue();
-        channel.sendMessage(" " + target.getAsMention() + " has been muted by: " + member.getAsMention() + "\nReason: " + reason).queue();
-
     }
 }
