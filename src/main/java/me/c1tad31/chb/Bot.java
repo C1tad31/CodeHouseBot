@@ -11,15 +11,15 @@ import java.util.List;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import javax.security.auth.login.LoginException;
+import me.c1tad31.chb.commands.SupportCommand;
+import me.c1tad31.chb.commands.SayCommand;
 
 import com.jagrosh.jdautilities.command.CommandClient;
 import com.jagrosh.jdautilities.command.CommandClientBuilder;
-
+import me.c1tad31.chb.modcommands.*;
 import me.c1tad31.chb.CurrencySystem.XPSystem;
 import me.c1tad31.chb.commands.HelpCommand;
 import me.c1tad31.chb.commands.MoveVCCommand;
-import me.c1tad31.chb.commands.SayCommand;
-import me.c1tad31.chb.commands.SupportCommand;
 import me.c1tad31.chb.events.BotReadyEvent;
 import me.c1tad31.chb.events.MemberJoinEvent;
 import me.c1tad31.chb.modcommands.BanCommand;
@@ -77,7 +77,6 @@ public class Bot {
     
                 CommandClient client = commandClientBuilder.build();
                 jda.addEventListener(client);
-               // jda.addEventListener(new MessageEvent());
                 jda.addEventListener(new BotReadyEvent());
                 jda.addEventListener(new MemberJoinEvent());
 
