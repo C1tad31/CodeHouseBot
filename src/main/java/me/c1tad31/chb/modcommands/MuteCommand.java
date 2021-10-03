@@ -6,10 +6,13 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.TextChannel;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
+
+import java.awt.Color;
 
 public class MuteCommand extends Command {
 
@@ -30,16 +33,36 @@ public class MuteCommand extends Command {
         Member member = event.getMember();
         Message message = event.getMessage();
         Member target = event.getMessage().getMentionedMembers().get(0);
-        StringBuilder reason = new StringBuilder();
-        List<Role> role = event.getGuild().getRolesByName("Muted", true);
 
-        for (Role r : role) {
-            if (!role) {
-                channel.sendMessage("Muted role not found... Creating one now!")
-                event.getGuild().createRole().setPermissions(Permission.EMPTY_PERMISSIONS).setColor(Color.GRAY).setName(args[1]).setHoisted(true).queue();
+        Role role = event.getGuild().getRolesByName("Muted", true).get(0);
+
+        boolean found = false;
+        for(Role r : event.getGuild().getRoles()) {
+            if(r.getName().equalsIgnoreCase("Muted")) {
+                found = true;
             }
-        } else {
-            channel.sendMessage(" " + target.getUser().getAsMention() + " has been muted by: " + member.getUser().getAsMention() + "\nReason: " + reason).queue();
         }
+
+        if(!found) {
+            channel.sendMessage("Muted role not found... Creating one now!");
+            event.getGuild().createRole().setPermissions(Permission.EMPTY_PERMISSIONS).setColor(Color.GRAY).setName(args[1]).setHoisted(true).queue();
+        }else {
+            StringBuilder sb = new StringBuilder();
+
+            if(args.length == 0)
+                sb.append("NaN");
+            else {
+                
+                for(int i = 1; i < args.length; i++) {
+                    sb.append(args[i]);
+                }
+
+            }
+            
+
+            event.getGuild().addRoleToMember(target, role).queue();
+            channel.sendMessage(" " + target.getUser().getAsMention() + " has been muted by: " + member.getUser().getAsMention() + "\nReason: " + sb.toString()).queue();
+        }
+
     }
 }
