@@ -5,15 +5,11 @@ import java.awt.Color;
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 
-import org.intellij.lang.annotations.Identifier;
-
 import me.c1tad31.chb.Bot;
 import me.c1tad31.chb.CodeMonkey;
 import me.c1tad31.chb.utils.MessageEmbed;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.exceptions.PermissionException;
 
 public class WarnCommand extends Command{
@@ -97,6 +93,5 @@ public class WarnCommand extends Command{
 
         sb.setLength(0);
     }
-
 
 }

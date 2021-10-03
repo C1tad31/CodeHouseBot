@@ -16,7 +16,7 @@ public class NukeCommand extends Command {
 
     @Override
     protected void execute(CommandEvent event) {
-        event.getTextChannel().createCopy().queue(channel->channel.sendMessage(":warning:Nuked channel:warning:\nhttps://imgur.com/a/93vq9R8").queue());
+        event.getTextChannel().createCopy().queue(channel->channel.sendMessage(":warning:Nuked channel:warning:\nhttps://tenor.com/view/explosion-space-earth-gif-14405202").queue());
         event.getTextChannel().delete().queue();
     }
     

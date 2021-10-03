@@ -15,11 +15,13 @@ import javax.security.auth.login.LoginException;
 import com.jagrosh.jdautilities.command.CommandClient;
 import com.jagrosh.jdautilities.command.CommandClientBuilder;
 
+import me.c1tad31.chb.CurrencySystem.XPSystem;
 import me.c1tad31.chb.commands.HelpCommand;
 import me.c1tad31.chb.commands.MoveVCCommand;
 import me.c1tad31.chb.commands.SayCommand;
 import me.c1tad31.chb.commands.SupportCommand;
 import me.c1tad31.chb.events.BotReadyEvent;
+import me.c1tad31.chb.events.MemberJoinEvent;
 import me.c1tad31.chb.modcommands.BanCommand;
 import me.c1tad31.chb.modcommands.ClearCommand;
 import me.c1tad31.chb.modcommands.KickCommand;
@@ -70,12 +72,17 @@ public class Bot {
                 commandClientBuilder.addCommand(new SupportCommand());
                 commandClientBuilder.addCommand(new ClearCommand());
                 commandClientBuilder.addCommand(new NukeCommand());
-    
+                commandClientBuilder.addCommand(new XPSystem());
+                    
     
                 CommandClient client = commandClientBuilder.build();
                 jda.addEventListener(client);
                // jda.addEventListener(new MessageEvent());
                 jda.addEventListener(new BotReadyEvent());
+                jda.addEventListener(new MemberJoinEvent());
+
+                XPSystem system = new XPSystem();
+                system.startTimer();
 
             } catch (Exception e) {
              
