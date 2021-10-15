@@ -27,8 +27,11 @@ public class AddRole extends Command {
 
         List<Role> role = event.getGuild().getRolesByName(args[1], true);
 
+        Member target = event.getMessage().getMentionedMembers().get(0);
+
         for(Role r : role) {
-            event.getGuild().addRoleToMember(member, r).queue();
+            event.getGuild().addRoleToMember(target, r).queue();
+            event.reply(String.format("%s has been added to %s", r.getAsMention(), target.getAsMention()));
         }
      
 	}

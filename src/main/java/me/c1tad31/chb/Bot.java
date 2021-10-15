@@ -1,5 +1,20 @@
 package me.c1tad31.chb;
 
+import com.jagrosh.jdautilities.command.CommandClient;
+import com.jagrosh.jdautilities.command.CommandClientBuilder;
+import me.c1tad31.chb.codingcommands.C.CCodeTemplate;
+import me.c1tad31.chb.codingcommands.Java.JavaCodeTemplate;
+import me.c1tad31.chb.codingcommands.Python.PythonCodeTemplate;
+import me.c1tad31.chb.commands.*;
+import me.c1tad31.chb.events.BotReadyEvent;
+import me.c1tad31.chb.events.MemberJoinEvent;
+import me.c1tad31.chb.events.MessageEvent;
+import me.c1tad31.chb.modcommands.*;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.JDABuilder;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,30 +22,6 @@ import java.security.Key;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
-
-import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
-import javax.security.auth.login.LoginException;
-import me.c1tad31.chb.commands.SupportCommand;
-import me.c1tad31.chb.commands.SayCommand;
-
-import com.jagrosh.jdautilities.command.CommandClient;
-import com.jagrosh.jdautilities.command.CommandClientBuilder;
-import me.c1tad31.chb.modcommands.*;
-import me.c1tad31.chb.CurrencySystem.XPSystem;
-import me.c1tad31.chb.commands.HelpCommand;
-import me.c1tad31.chb.commands.MoveVCCommand;
-import me.c1tad31.chb.events.BotReadyEvent;
-import me.c1tad31.chb.events.MemberJoinEvent;
-import me.c1tad31.chb.modcommands.BanCommand;
-import me.c1tad31.chb.modcommands.ClearCommand;
-import me.c1tad31.chb.modcommands.KickCommand;
-import me.c1tad31.chb.modcommands.MuteCommand;
-import me.c1tad31.chb.modcommands.NukeCommand;
-import me.c1tad31.chb.modcommands.UnmuteCommand;
-import me.c1tad31.chb.modcommands.WarnCommand;
-import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.JDABuilder;
 
 
 public class Bot {
@@ -58,14 +49,14 @@ public class Bot {
     }
 
 
-    public static void main(String[] args) throws IOException, LoginException {
+    public static void main(String[] args) throws IOException {
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Bot.class.getResourceAsStream("config/token.txt")));
         String token;
 
         while ((token = bufferedReader.readLine()) != null) {
 
-           
+
             Cipher cipher = null;
             try {
                 String key = "ABCDFEGHIJKLMNOP";
@@ -81,7 +72,7 @@ public class Bot {
                 commandClientBuilder.setPrefix("-");
                 commandClientBuilder.setHelpWord("helpme");
                 commandClientBuilder.setOwnerId("892899456574435348");
-    
+
                 commandClientBuilder.addCommands(new HelpCommand());
                 commandClientBuilder.addCommands(new KickCommand());
                 commandClientBuilder.addCommands(new BanCommand());
@@ -93,28 +84,31 @@ public class Bot {
                 commandClientBuilder.addCommand(new SupportCommand());
                 commandClientBuilder.addCommand(new ClearCommand());
                 commandClientBuilder.addCommand(new NukeCommand());
-                commandClientBuilder.addCommand(new XPSystem());
                 commandClientBuilder.addCommand(new CreateRole());
                 commandClientBuilder.addCommand(new AddRole());
                 commandClientBuilder.addCommand(new RemoveRole());
-                    
-    
+                commandClientBuilder.addCommand(new JavaCodeTemplate());
+                commandClientBuilder.addCommand(new PythonCodeTemplate());
+                commandClientBuilder.addCommand(new CCodeTemplate());
+                commandClientBuilder.addCommand(new PingCommand());
+                commandClientBuilder.addCommand(new MemeCommand());
+
+
                 CommandClient client = commandClientBuilder.build();
                 jda.addEventListener(client);
                 jda.addEventListener(new BotReadyEvent());
                 jda.addEventListener(new MemberJoinEvent());
-
-                XPSystem system = new XPSystem();
+                jda.addEventListener(new MessageEvent());
 
             } catch (Exception e) {
-             
+
                 e.printStackTrace();
             }
 
         }
         bufferedReader.close();
 
-        
+
 
     }
 }

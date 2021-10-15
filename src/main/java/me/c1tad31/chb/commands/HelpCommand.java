@@ -1,14 +1,9 @@
 package me.c1tad31.chb.commands;
 
-import java.util.List;
+import java.io.File;
 
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
-
-import net.dv8tion.jda.api.entities.ChannelType;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
 
 public class HelpCommand extends Command {
 
@@ -20,16 +15,7 @@ public class HelpCommand extends Command {
 
     @Override
     protected void execute(CommandEvent event) {
-        TextChannel channel = event.getTextChannel();
-        Message message = event.getMessage();
-
-        Object text = event.getArgs();
-
-        message.delete().queue();
-
-
-        if (text instanceof String string) {
-            channel.sendMessage(" " + string + " is a String").queue();
-        }
+        File file = new File("CodeHouseBot\\src\\main\\java\\me\\c1tad31\\chb\\commands.txt");
+        event.reply(file, "commands.txt");
     }
 }

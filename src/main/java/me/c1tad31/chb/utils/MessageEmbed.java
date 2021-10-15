@@ -13,7 +13,7 @@ import net.dv8tion.jda.api.entities.Invite.Channel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 public class MessageEmbed {
-    public static void createEmbed(CommandEvent event, TextChannel channel, Member member, String title, String desc, String footer, Color color) {
+    public static void createEmbed(CommandEvent event, TextChannel channel, Member member, String title, String image, String desc, String footer, Color color) {
         EmbedBuilder newEmbed = new EmbedBuilder()
             .setAuthor(member.getUser().getName(), member.getUser().getAvatarUrl(), member.getUser().getAvatarUrl())
             .setTitle(title)

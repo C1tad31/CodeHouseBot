@@ -1,0 +1,16 @@
+========== Commands for Code House Bot ==========
+
+========== User Commands ==========
+-help: Get these commands
+-say: Say a message through the bot
+-support: Support the bot developers financially
+
+More Commands Coming Soon...
+========== Moderation Commands ==========
+-clear: Delete a specified amount of messages from the chat
+-kick: Kick a specified user from the chat
+-ban: Ban a specified user from the chat
+-mute: Mute a specified user in the chat
+-unmute: Unmute a specified user in the chat
+-warn: Warn a specified user in the chat
+-warnings: Check a specified users Warnings
